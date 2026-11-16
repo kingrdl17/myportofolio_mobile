@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: darkBaseTheme.copyWith(
             textTheme: GoogleFonts.googleSansFlexTextTheme(
-              lightBaseTheme.textTheme,
+              darkBaseTheme.textTheme,
             ),
           ),
           themeMode: ThemeMode.system,
