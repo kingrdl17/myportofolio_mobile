@@ -3,7 +3,7 @@
 A new Flutter project.
 
 ## Essays
-### Tugas 8
+### Tugas 7
 
 1. Widget tree adalah susunan atau lapisan widget-widget yang menyusun sebuah UI di aplikasi flutter. Posisi atau perilaku sebuah widget (child) yang mempunyai widget induk (parent) ditentukan oleh parent.
 
@@ -34,7 +34,15 @@ A new Flutter project.
 
 3. MaterialApp menyediakan base aplikasi dengan style gaya Material Design. Di proyek ini mengatur judul aplikasi, tema terang dan gelap, pilihan tema berdasarkan pengaturan sistem, serta halaman awal MyHomePage (main.dart).
 
-4. Hot reload: merefresh perubahan kode dart dan build ulang tampilan tanpa harus memulai ulang aplikasi. State yang berjalan tetap dipertahankan
+4. Simply put, StatelessWidget tidak bisa berubah. StatefulWidget bisa berubah.
+
+    Untuk elemen aplikais yang tetap (seperti menu, judul, dll.) gunakan StatelessWidget. Untuk elemen yang bisa berubah, (seperti SnackBar, dialog, dll) gunakan StatefulWidget
+
+5.  BuildContext mengacu pada posisi sebuah widget di dalam widget tree. Dengan context itu, widget dapat mencari informasi atau layanan yang disediakan oleh parent-parent nya. Karena itu, context penting untuk mengakses konfigurasi yang berlaku di lokasi widget tersebut.
+
+Dalam metode build, itu menggunakan context untuk mengambil warna dan style, membaca ukuran layar, dan mencari ScaffoldMessenger untuk menampilkan SnackBar
+
+6. Hot reload: merefresh perubahan kode dart dan build ulang tampilan tanpa harus memulai ulang aplikasi. State yang berjalan tetap dipertahankan
 
 Hot restart: memulai ulang aplikasi dari awal sehingga state juga diulang dari nol. lakukan hot restart jika ada kode yang tidak bekerja dengan hot reload, sehingga perlu hot restart.
 
