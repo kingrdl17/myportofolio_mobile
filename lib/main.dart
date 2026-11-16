@@ -1,5 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myportofolio_mobile/menu.dart';
 
 void main() {
@@ -13,21 +14,36 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
+        final lightScheme =
+            lightDynamic ?? ColorScheme.fromSeed(seedColor: Colors.indigo);
+        final darkScheme =
+            darkDynamic ??
+            ColorScheme.fromSeed(
+              seedColor: Colors.indigo,
+              brightness: Brightness.dark,
+            );
+        final lightBaseTheme = ThemeData(
+          colorScheme: lightScheme,
+          typography: Typography.material2021(colorScheme: lightScheme),
+          useMaterial3: true,
+        );
+        final darkBaseTheme = ThemeData(
+          colorScheme: darkScheme,
+          typography: Typography.material2021(colorScheme: darkScheme),
+          useMaterial3: true,
+        );
+
         return MaterialApp(
-          title: 'MyPortfolio',
-          theme: ThemeData(
-            colorScheme:
-                lightDynamic ?? ColorScheme.fromSeed(seedColor: Colors.indigo),
-            useMaterial3: true,
+          title: 'Clay\'s Portfolio',
+          theme: lightBaseTheme.copyWith(
+            textTheme: GoogleFonts.googleSansFlexTextTheme(
+              lightBaseTheme.textTheme,
+            ),
           ),
-          darkTheme: ThemeData(
-            colorScheme:
-                darkDynamic ??
-                ColorScheme.fromSeed(
-                  seedColor: Colors.indigo,
-                  brightness: Brightness.dark,
-                ),
-            useMaterial3: true,
+          darkTheme: darkBaseTheme.copyWith(
+            textTheme: GoogleFonts.googleSansFlexTextTheme(
+              lightBaseTheme.textTheme,
+            ),
           ),
           themeMode: ThemeMode.system,
           home: const MyHomePage(),
