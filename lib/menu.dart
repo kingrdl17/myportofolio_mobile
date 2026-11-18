@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 
 //list of contents
 class MyHomePage extends StatelessWidget {
@@ -54,6 +55,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surface,
         foregroundColor: Theme.of(context).colorScheme.onSurface,
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -173,7 +175,7 @@ class PortfolioActionCard extends StatelessWidget {
     final accentColor = item.color ?? colorScheme.primary;
     final cardBackground = Color.alphaBlend(
       colorScheme.brightness == Brightness.dark
-          ? Colors.white.withValues(alpha: 0.12)
+          ? Colors.white.withValues(alpha: 0.05)
           : Colors.black.withValues(alpha: 0.08),
       colorScheme.surface,
     );
