@@ -2,6 +2,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/post_form.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // TODO: Impor halaman ProjectFormPage jika sudah dibuat
@@ -65,6 +66,17 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => ProjectFormPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_circle_outline),
+            title: const Text('Add Post'),
+            onTap: () {
+              HapticFeedback.selectionClick();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => PostFormPage()),
               );
             },
           ),

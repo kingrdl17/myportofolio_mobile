@@ -167,7 +167,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(
-                        Theme.of(context).colorScheme.primaryContainer,
+                        Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     onPressed: () {
