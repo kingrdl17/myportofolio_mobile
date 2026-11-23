@@ -48,3 +48,17 @@ Hot restart: memulai ulang aplikasi dari awal sehingga state juga diulang dari n
 
 Full restart: melakukan quit dan run kembali aplikasi secara keseluruhan. Perlu dilakukan untuk perubahan yang melibatkan code native atau konfigurasi.
 
+### Tugas 8
+
+1. Navigator.push() -> Menambahkan sebuah halaman diatas halaman sebelumnya (user bisa pencet tombol back)
+   Navigator.pushReplacement() -> Mengganti halaman lama ke halaman baru (jika user pencet back, maka balik ke launcher)
+   Navigator.pop() -> Mengembalikan ke halaman sebelumnya
+   Membuka form dari kartu aksi menggunakan metode push, karena user masih bisa pencet tombol back dan akan kembali ke halaman home. Saat user memencet opsi home melalui drawer, Navigator.pushReplacement() digunakan dan halaman home akan muncul, menggantikan apapun halaman yang sedang terbuka.
+
+2. Scaffold berfungsi sebagai kerangka utama halaman, sedangkan AppBar menampilkan judul dan Drawer menyediakan navigasi. Susunan ini membuat halaman Home dan form memiliki struktur yang konsisten. Contoh: AppBar di halaman Home dan form menggunakan warna surface untuk latar belakang dan onSurface untuk teks. Warna secondary juga dipakai pada tombol Save dan teks di drawer.
+3. Form menggunakan Column agar kolom-kolom input tersusun vertikal. Padding memberi jarak di sekitar setiap kolom, sedangkan SingleChildScrollView memungkinkan form discroll jika semua isinya tidak muat di layar. maka user tetap dapat mencapai kolom dan tombol Save saat ruang layar terbatas.
+
+4. GlobalKey<FormState> menghubungkan tombol Save dengan Form. Setiap validator memeriksa nilai kolom.
+   validate() menjalankan pemeriksaan tersebut dan menghasilkan true jika semua input valid. 
+
+   Contohnya seperti judul yang kosong atau hanya berisi spasi ditolak karena judul wajib diisi. Jenis input atau papan ketik hanya membantu user memasukkan nilai. keduanya tidak memastikan nilai yang dimasukkan valid sehingga pemeriksaan tetap perlu dilakukan oleh validator.
