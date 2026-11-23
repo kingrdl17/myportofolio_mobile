@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/post_form.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 
 //sections containing cards
@@ -73,6 +74,11 @@ class PortfolioActionCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ProjectFormPage()),
+            );
+          } else if (item.name == 'New Post') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PostFormPage()),
             );
           } else {
             _showItemFeedback(context, item);

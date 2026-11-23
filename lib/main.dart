@@ -34,7 +34,10 @@ class MyApp extends StatelessWidget {
           colorScheme: darkScheme,
           typography: Typography.material2021(colorScheme: darkScheme),
           useMaterial3: true,
-          textTheme: _toMaterialTextTheme(googleTextTheme),
+          textTheme: _toMaterialTextTheme(googleTextTheme).apply(
+            bodyColor: darkScheme.onSurface,
+            displayColor: darkScheme.onSurface,
+          ),
         );
 
         return MaterialApp(

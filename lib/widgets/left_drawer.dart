@@ -13,13 +13,12 @@ class LeftDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: ListView(
         children: [
           DrawerHeader(
             // TODO: Bagian drawer header
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-            ),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -70,8 +69,8 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.add_circle_outline),
-            title: const Text('Add Post'),
+            leading: const Icon(Icons.create_outlined),
+            title: const Text('New Post'),
             onTap: () {
               HapticFeedback.selectionClick();
               Navigator.pushReplacement(

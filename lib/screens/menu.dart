@@ -26,15 +26,15 @@ class MyHomePage extends StatelessWidget {
   final List<ItemHomepage> postItems = const [
     ItemHomepage(
       'View Posts',
-      Icons.work_outline,
+      Icons.article_rounded,
       color: Colors.deepPurple,
       subtitle: "Take a look at what I've done",
     ),
     ItemHomepage(
-      'Add Post',
-      Icons.add_circle_outline,
+      'New Post',
+      Icons.create,
       color: Colors.teal,
-      subtitle: 'Add new post',
+      subtitle: 'Make a new post',
     ),
   ];
   final ItemHomepage logoutItem = const ItemHomepage(

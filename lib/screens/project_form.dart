@@ -167,7 +167,7 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(
-                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                     onPressed: () {
@@ -205,7 +205,10 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                     },
                     child: const Text(
                       "Save",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
