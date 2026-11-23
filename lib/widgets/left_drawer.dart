@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:myportofolio_mobile/menu.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:myportofolio_mobile/screens/menu.dart';
+import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // TODO: Impor halaman ProjectFormPage jika sudah dibuat
@@ -30,7 +31,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 Text(
-                  'Expwore pewsonal pwojects and expewiences!! :3',
+                  'Personal Portofolio',
                   style: TextStyle(
                     fontSize: 15,
                     color: Theme.of(context).colorScheme.secondary,
@@ -60,6 +61,11 @@ class LeftDrawer extends StatelessWidget {
               /*
               TODO: Buatlah routing ke halaman ProjectFormPage yang akan dibuat nanti.
               */
+              HapticFeedback.selectionClick();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ProjectFormPage()),
+              );
             },
           ),
         ],
