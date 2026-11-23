@@ -1,6 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
-import 'package:myportofolio_mobile/widgets/project_card.dart';
+import 'package:myportofolio_mobile/widgets/cards.dart';
 
 //list of contents
 class MyHomePage extends StatelessWidget {
@@ -23,18 +23,18 @@ class MyHomePage extends StatelessWidget {
       subtitle: 'Add a new project',
     ),
   ];
-  final List<ItemHomepage> experienceItems = const [
+  final List<ItemHomepage> postItems = const [
     ItemHomepage(
-      'View Experience',
+      'View Posts',
       Icons.work_outline,
       color: Colors.deepPurple,
       subtitle: "Take a look at what I've done",
     ),
     ItemHomepage(
-      'Add Experience',
+      'Add Post',
       Icons.add_circle_outline,
       color: Colors.teal,
-      subtitle: 'Add new experience',
+      subtitle: 'Add new post',
     ),
   ];
   final ItemHomepage logoutItem = const ItemHomepage(
@@ -78,7 +78,7 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(height: 20),
             PortfolioSection(title: 'Projects', items: projectItems),
             const SizedBox(height: 16),
-            PortfolioSection(title: 'Experience', items: experienceItems),
+            PortfolioSection(title: 'Posts', items: postItems),
             const SizedBox(height: 24),
             PortfolioSection(title: 'Other', items: [logoutItem]),
           ],
