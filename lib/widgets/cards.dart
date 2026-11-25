@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/screens/post_form.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
+import 'package:provider/provider.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
 
 //sections containing cards
 class PortfolioSection extends StatelessWidget {
@@ -69,17 +72,36 @@ class PortfolioActionCard extends StatelessWidget {
       child: InkWell(
         onTapDown: (_) => HapticFeedback.selectionClick(),
         onTapUp: (_) => HapticFeedback.lightImpact(),
-        onTap: () {
+        onTap: () async {
           if (item.name == 'Add Project') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProjectFormPage()),
-            );
+            final ok = await ensureLoggedIn(context);
+            if (ok && context.mounted) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProjectFormPage(),
+                ),
+              );
+            }
           } else if (item.name == 'New Post') {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const PostFormPage()),
             );
+          } else if (item.name == 'Log out') {
+            final auth = context.read<AuthState>();
+            if (auth.isLoggedIn) {
+              await auth.logout();
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Logged out successfully')),
+                );
+              }
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('You are not logged in')),
+              );
+            }
           } else {
             _showItemFeedback(context, item);
           }

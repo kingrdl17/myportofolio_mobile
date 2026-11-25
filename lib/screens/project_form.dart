@@ -1,5 +1,10 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:provider/provider.dart';
+import 'package:myportofolio_mobile/models/project.dart';
+import 'package:myportofolio_mobile/services/api_client.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
 
 class ProjectFormPage extends StatefulWidget {
   const ProjectFormPage({super.key});
@@ -170,37 +175,64 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                         Theme.of(context).colorScheme.secondary,
                       ),
                     ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                    onPressed: () async {
+                      if (!_formKey.currentState!.validate()) return;
+
+                      final authState = context.read<AuthState>();
+                      final ok = await ensureLoggedIn(context);
+                      if (!ok || !mounted) return;
+
+                      final newProject = Project(
+                        projectName: _projectName,
+                        projectDescription: _description,
+                        category: _category.toLowerCase(),
+                        technologiesUsed: _technologies,
+                        projectLink: _projectLink,
+                      );
+
+                      try {
+                        await context.read<ApiClient>().createProject(
+                          newProject,
+                          token: authState.token!,
+                        );
+                        if (!mounted) return;
+
                         showDialog(
                           context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Project successfully added!'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Nama Proyek: $_projectName'),
-                                    Text('Deskripsi: $_description'),
-                                    Text('Kategori: $_category'),
-                                    Text('Teknologi: $_technologies'),
-                                    Text('Tautan: $_projectLink'),
-                                  ],
-                                ),
+                          builder: (context) => AlertDialog(
+                            title: const Text('Success'),
+                            content: const Text(
+                              'Project successfully added to backend!',
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.pop(
+                                    context,
+                                  ); // Kembali ke halaman utama
+                                },
+                                child: const Text('OK'),
                               ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _formKey.currentState!.reset();
-                                  },
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
+                            ],
+                          ),
                         );
+                      } on ApiException catch (e) {
+                        if (!mounted) return;
+                        if (e.statusCode == 401 || e.statusCode == 403) {
+                          await authState.logout();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Unauthorized. Make sure you are logged in as superuser.',
+                              ),
+                            ),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Failed: ${e.message}')),
+                          );
+                        }
                       }
                     },
                     child: const Text(
