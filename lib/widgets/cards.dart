@@ -6,6 +6,7 @@ import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:provider/provider.dart';
 import 'package:myportofolio_mobile/services/auth_state.dart';
 import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
 
 //sections containing cards
 class PortfolioSection extends StatelessWidget {
@@ -87,6 +88,13 @@ class PortfolioActionCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const PostFormPage()),
+            );
+          } else if (item.name == 'View Projects') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProjectListScreen(),
+              ),
             );
           } else if (item.name == 'Log out') {
             final auth = context.read<AuthState>();

@@ -47,6 +47,18 @@ class ApiClient {
     return Project.fromJson(decoded);
   }
 
+  Future<List<Project>> getProjects() async {
+    final response = await _client.get(
+      _uri('/api/v1/projects/'),
+      headers: {'Accept': 'application/json'},
+    );
+    _ensureSuccess(response);
+    final decoded = jsonDecode(response.body) as List<dynamic>;
+    return decoded
+        .map((e) => Project.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
   Future<String> obtainToken(String username, String password) async {
     final response = await _client.post(
       _uri('/api/v1/auth/token/'),
